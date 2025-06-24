@@ -183,11 +183,11 @@
                 <div>
                     <h3 class="text-xl font-semibold text-white mb-4">Blender & 3D</h3>
                     <div class="space-y-3">
-                        <a href="https://www.youtube.com/@BlenderGuruOfficial" target="_blank" class="block p-3 bg-zinc-900 rounded-lg hover:bg-zinc-800 transition-all">Blender Guru</a>
+                        <a href="https://www.youtube.com/@BlenderGuru" target="_blank" class="block p-3 bg-zinc-900 rounded-lg hover:bg-zinc-800 transition-all">Blender Guru</a>
                         <a href="https://www.youtube.com/@ianhubert" target="_blank" class="block p-3 bg-zinc-900 rounded-lg hover:bg-zinc-800 transition-all">Ian Hubert</a>
                         <a href="https://www.youtube.com/@CGGeek" target="_blank" class="block p-3 bg-zinc-900 rounded-lg hover:bg-zinc-800 transition-all">CG Geek</a>
                         <a href="https://www.youtube.com/@Polyfjord" target="_blank" class="block p-3 bg-zinc-900 rounded-lg hover:bg-zinc-800 transition-all">Polyfjord</a>
-                        <a href="https://www.youtube.com/@ducky3d" target="_blank" class="block p-3 bg-zinc-900 rounded-lg hover:bg-zinc-800 transition-all">Ducky 3D</a>
+                        <a href="https://www.youtube.com/@Ducky3D" target="_blank" class="block p-3 bg-zinc-900 rounded-lg hover:bg-zinc-800 transition-all">Ducky 3D</a>
                         <a href="https://polyhaven.com/" target="_blank" class="block p-3 bg-zinc-900 rounded-lg hover:bg-zinc-800 transition-all">Poly Haven (Assets)</a>
                         <a href="https://www.artstation.com/" target="_blank" class="block p-3 bg-zinc-900 rounded-lg hover:bg-zinc-800 transition-all">ArtStation (Inspiration)</a>
                     </div>
@@ -196,7 +196,7 @@
                     <h3 class="text-xl font-semibold text-white mb-4">VFX & Compositing</h3>
                     <div class="space-y-3">
                         <a href="https://www.youtube.com/@CorridorCrew" target="_blank" class="block p-3 bg-zinc-900 rounded-lg hover:bg-zinc-800 transition-all">Corridor Crew</a>
-                        <a href="https://www.youtube.com/@VideoCopilot" target="_blank" class="block p-3 bg-zinc-900 rounded-lg hover:bg-zinc-800 transition-all">Video Copilot</a>
+                        <a href="https://www.videocopilot.net/" target="_blank" class="block p-3 bg-zinc-900 rounded-lg hover:bg-zinc-800 transition-all">Video Copilot</a>
                         <a href="https://www.youtube.com/@BenMarriott" target="_blank" class="block p-3 bg-zinc-900 rounded-lg hover:bg-zinc-800 transition-all">Ben Marriott</a>
                         <a href="https://www.actionvfx.com/blog" target="_blank" class="block p-3 bg-zinc-900 rounded-lg hover:bg-zinc-800 transition-all">ActionVFX Blog</a>
                         <a href="https://www.thegnomonworkshop.com/" target="_blank" class="block p-3 bg-zinc-900 rounded-lg hover:bg-zinc-800 transition-all">The Gnomon Workshop</a>
@@ -220,17 +220,17 @@
         </section>
 
         <section class="section-card text-center" data-section>
-            <h2 class="text-3xl md:text-4xl text-gradient mb-6">Portfolio & Showreel</h2>
+            <h2 class="text-3xl md:text-4xl text-gradient mb-8">Portfolio & Showreel</h2>
             <div class="video-container mx-auto mb-8 w-full max-w-3xl">
-                <iframe src="https://www.youtube.com/embed/YOUR_YOUTUBE_VIDEO_ID?controls=1&autoplay=0&modestbranding=1&rel=0"
+                <iframe src="https://www.youtube.com/embed/YOUR_YOUTUBE_EMBED_LINK_HERE"
                         title="CINI FX Showreel" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                         allowfullscreen></iframe>
             </div>
-            <a href="https://drive.google.com/your-portfolio-link-here" target="_blank" class="btn-primary">
+            <a href="https://drive.google.com/YOUR_GOOGLE_DRIVE_PORTFOLIO_LINK_HERE" target="_blank" class="btn-primary">
                 <i class="fa-solid fa-download"></i> Download My Portfolio
             </a>
             <p class="text-xs text-zinc-600 mt-4">
-                (Please replace the YouTube and Google Drive links with your actual content.)
+                (Please replace the **YouTube embed link** and **Google Drive portfolio link** with your actual content.)
             </p>
         </section>
 
@@ -336,13 +336,17 @@
             feedbackArea.classList.add('hidden');
             restartButton.classList.add('hidden');
             
+            // Randomize the order of questions for a fresh experience each time
             quizQuestions.sort(() => Math.random() - 0.5);
 
             const q = quizQuestions[currentQuestionIndex];
             questionText.textContent = `${currentQuestionIndex + 1}. ${q.question}`;
             optionsContainer.innerHTML = '';
 
-            q.options.forEach(option => {
+            // Randomize options order for each question
+            const shuffledOptions = [...q.options].sort(() => Math.random() - 0.5);
+
+            shuffledOptions.forEach(option => {
                 const button = document.createElement('button');
                 button.textContent = option;
                 button.classList.add('quiz-option-btn');
@@ -352,11 +356,11 @@
         }
 
         function checkAnswer(selectedOption, correctAnswer, clickedButton) {
-            if (answered) return;
+            if (answered) return; // Prevent multiple clicks
             answered = true;
 
             Array.from(optionsContainer.children).forEach(btn => {
-                btn.disabled = true;
+                btn.disabled = true; // Disable all options after an answer
                 if (btn.textContent === correctAnswer) {
                     btn.classList.add('correct');
                 }
@@ -365,16 +369,16 @@
             if (selectedOption === correctAnswer) {
                 feedbackArea.textContent = "Correct! 🎉";
                 feedbackArea.className = 'text-center mt-6 text-xl font-medium text-green-400';
-                clickedButton.classList.add('correct');
+                clickedButton.classList.add('correct'); // Highlight the correct chosen answer
                 score++;
             } else {
                 feedbackArea.textContent = `Incorrect. The answer is "${correctAnswer}". 😔`;
                 feedbackArea.className = 'text-center mt-6 text-xl font-medium text-red-500';
-                clickedButton.classList.add('incorrect');
+                clickedButton.classList.add('incorrect'); // Highlight the incorrect chosen answer
             }
             feedbackArea.classList.remove('hidden');
 
-            setTimeout(nextQuestion, 2000);
+            setTimeout(nextQuestion, 2000); // Move to next question after 2 seconds
         }
 
         function nextQuestion() {
@@ -400,6 +404,7 @@
             loadQuestion();
         }
 
+        // Initialize quiz if container exists
         if(document.getElementById('quiz-container')) {
             loadQuestion();
         }
