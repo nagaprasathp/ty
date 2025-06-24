@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CINI FX - Nagaprasath's Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://api.fontshare.com/v2/css?f[]=general-sans@400,500,600,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* --- Keyframe Animations --- */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        @keyframes slideInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* --- New Luma Labs Inspired Minimalist Theme --- */
+        :root {
+            --background: #000000;
+            --foreground: #ffffff;
+            --subtle-gray: #a1a1aa; /* zinc-400 */
+            --card-bg: #18181b; /* zinc-900 */
+            --border-color: rgba(255, 255, 255, 0.1);
+        }
+
+        body {
+            font-family: 'General Sans', sans-serif;
+            background-color: var(--background);
+            color: var(--subtle-gray);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            overflow-x: hidden;
+            animation: fadeIn 1s ease-out;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1.5rem;
+        }
+        .section-card {
+            background-color: var(--card-bg);
+            border-radius: 1.5rem;
+            padding: 3rem;
+            margin-bottom: 3.5rem;
+            box-shadow: none;
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+            opacity: 0;
+            transform: translateY(30px);
+            border: 1px solid var(--border-color);
+        }
+        .section-card.is-revealed {
+            animation: slideInUp 0.8s ease-out forwards;
+        }
+        .section-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+        
+        /* --- Typography & Title Styles --- */
+        .main-title {
+            color: var(--foreground);
+            letter-spacing: -0.05em;
+        }
+        .text-gradient { /* Re-purposed for subtle headings */
+            color: var(--foreground);
+            font-weight: 600;
+        }
+        .strong-accent {
+            color: var(--foreground);
+            font-weight: 500;
+        }
+        
+        /* --- UI Element Styles --- */
+        .btn-primary {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            background: var(--foreground);
+            color: var(--background); 
+            padding: 1rem 2.25rem;
+            border-radius: 50px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease-out;
+            border: 1px solid var(--foreground);
+        }
+        .btn-primary:hover {
+            background: var(--background);
+            color: var(--foreground);
+        }
+        .quiz-option-btn {
+            background-color: var(--card-bg);
+            color: var(--subtle-gray);
+            padding: 1rem 1.25rem;
+            border-radius: 0.75rem;
+            text-align: left;
+            width: 100%;
+            border: 1px solid var(--border-color);
+            transition: all 0.2s;
+        }
+        .quiz-option-btn:hover {
+            background-color: var(--foreground);
+            border-color: var(--foreground);
+            color: var(--background);
+        }
+        .quiz-option-btn.correct { background-color: #16a34a; border-color: #22c55e; color: #ffffff; font-weight: 700; }
+        .quiz-option-btn.incorrect { background-color: #dc2626; border-color: #ef4444; color: #ffffff; font-weight: 700; }
+        .hidden { display: none; }
+        .profile-img {
+            border-radius: 50%;
+            border: 2px solid var(--border-color);
+            transition: transform 0.3s ease-in-out;
+        }
+        .profile-img:hover { transform: scale(1.05); }
+        .video-container {
+            position: relative; width: 100%; padding-bottom: 56.25%; height: 0;
+            overflow: hidden; border-radius: 1.25rem;
+            background-color: #111;
+        }
+        .video-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; }
+        .social-link {
+            display: inline-flex; align-items: center; justify-content: center;
+            width: 48px; height: 48px; border-radius: 50%;
+            background-color: var(--card-bg); color: var(--subtle-gray);
+            font-size: 1.25rem;
+            border: 1px solid var(--border-color);
+            transition: all 0.3s ease;
+        }
+        .social-link:hover {
+            transform: translateY(-5px) scale(1.1);
+            background: var(--foreground);
+            color: var(--background);
+        }
+        
+        @media (min-width: 768px) {
+            .about-grid { grid-template-columns: 1fr 250px; }
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <header class="text-center py-16 md:py-24 px-4">
+        <h1 class="text-7xl md:text-9xl font-bold main-title mb-4">CINI FX CREATION</h1>
+        <p class="text-xl md:text-2xl font-light text-zinc-400">"Where Ideas Spark and Dreams Ignite."</p>
+    </header>
+
+    <main class="container">
+        <section class="section-card text-center" data-section>
+            <h2 class="text-3xl md:text-4xl text-gradient mb-6">Welcome to CINI FX!</h2>
+            <p class="text-lg text-zinc-300 leading-relaxed max-w-3xl mx-auto mb-4">
+                Dive deep into the enchanting world of cinema, mesmerizing VFX, and thrilling games with us. At CINI FX, we celebrate the magic of movies, unravel the secrets behind stunning visual effects, and explore the exciting realms of gaming. Whether you're a film fanatic, a VFX enthusiast, or a gaming guru, we've got something for you.
+            </p>
+            <p class="text-lg text-zinc-300 leading-relaxed max-w-3xl mx-auto">
+                Subscribe and join the CINI FX community today!
+            </p>
+        </section>
+        
+
+        <section class="section-card" data-section>
+            <h2 class="text-3xl md:text-4xl font-semibold text-gradient mb-4 text-center">Tech & Creative Quiz</h2>
+            <div id="quiz-container" class="bg-black/20 p-6 sm:p-8 rounded-lg">
+                <div id="question-area">
+                    <p class="text-xl font-medium mb-6 text-center text-zinc-300" id="question-text"></p>
+                    <div id="options-container" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    </div>
+                </div>
+                <div id="feedback-area" class="text-center mt-6 text-xl font-medium hidden"></div>
+                <div class="flex justify-center mt-8">
+                    <button id="restart-button" class="btn-primary hidden">Restart Quiz</button>
+                </div>
+            </div>
+        </section>
+
+        <section class="section-card" data-section>
+            <h2 class="text-3xl md:text-4xl text-gradient mb-8 text-center">Learning Hub</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+                <div>
+                    <h3 class="text-xl font-semibold text-white mb-4">Blender & 3D</h3>
+                    <div class="space-y-3">
+                        <a href="https://www.youtube.com/@BlenderGuruOfficial" target="_blank" class="block p-3 bg-zinc-900 rounded-lg hover:bg-zinc-800 transition-all">Blender Guru</a>
+                        <a href="https://www.youtube.com/@ianhubert" target="_blank" class="block p-3 bg-zinc-900 rounded-lg hover:bg-zinc-800 transition-all">Ian Hubert</a>
+                        <a href="https://www.youtube.com/@CGGeek" target="_blank" class="block p-3 bg-zinc-900 rounded-lg hover:bg-zinc-800 transition-all">CG Geek</a>
+                        <a href="https://www.youtube.com/@Polyfjord" target="_blank" class="block p-3 bg-zinc-900 rounded-lg hover:bg-zinc-800 transition-all">Polyfjord</a>
+                        <a href="https://www.youtube.com/@ducky3d" target="_blank" class="block p-3 bg-zinc-900 rounded-lg hover:bg-zinc-800 transition-all">Ducky 3D</a>
+                        <a href="https://polyhaven.com/" target="_blank" class="block p-3 bg-zinc-900 rounded-lg hover:bg-zinc-800 transition-all">Poly Haven (Assets)</a>
+                        <a href="https://www.artstation.com/" target="_blank" class="block p-3 bg-zinc-900 rounded-lg hover:bg-zinc-800 transition-all">ArtStation (Inspiration)</a>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="text-xl font-semibold text-white mb-4">VFX & Compositing</h3>
+                    <div class="space-y-3">
+                        <a href="https://www.youtube.com/@CorridorCrew" target="_blank" class="block p-3 bg-zinc-900 rounded-lg hover:bg-zinc-800 transition-all">Corridor Crew</a>
+                        <a href="https://www.youtube.com/@VideoCopilot" target="_blank" class="block p-3 bg-zinc-900 rounded-lg hover:bg-zinc-800 transition-all">Video Copilot</a>
+                        <a href="https://www.youtube.com/@BenMarriott" target="_blank" class="block p-3 bg-zinc-900 rounded-lg hover:bg-zinc-800 transition-all">Ben Marriott</a>
+                        <a href="https://www.actionvfx.com/blog" target="_blank" class="block p-3 bg-zinc-900 rounded-lg hover:bg-zinc-800 transition-all">ActionVFX Blog</a>
+                        <a href="https://www.thegnomonworkshop.com/" target="_blank" class="block p-3 bg-zinc-900 rounded-lg hover:bg-zinc-800 transition-all">The Gnomon Workshop</a>
+                        <a href="https://aescripts.com/" target="_blank" class="block p-3 bg-zinc-900 rounded-lg hover:bg-zinc-800 transition-all">aescripts + aeplugins</a>
+                        <a href="https://www.foundry.com/products/nuke-family/nuke-non-commercial" target="_blank" class="block p-3 bg-zinc-900 rounded-lg hover:bg-zinc-800 transition-all">Nuke Non-Commercial</a>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="text-xl font-semibold text-white mb-4">Game Dev & AI</h3>
+                    <div class="space-y-3">
+                        <a href="https://www.youtube.com/@UnrealEngine" target="_blank" class="block p-3 bg-zinc-900 rounded-lg hover:bg-zinc-800 transition-all">Unreal Engine</a>
+                        <a href="https://www.youtube.com/@Unity" target="_blank" class="block p-3 bg-zinc-900 rounded-lg hover:bg-zinc-800 transition-all">Unity</a>
+                        <a href="https://www.youtube.com/@Brackeys" target="_blank" class="block p-3 bg-zinc-900 rounded-lg hover:bg-zinc-800 transition-all">Brackeys (Archive)</a>
+                        <a href="https://80.lv/" target="_blank" class="block p-3 bg-zinc-900 rounded-lg hover:bg-zinc-800 transition-all">80 Level (Industry News)</a>
+                        <a href="https://www.youtube.com/@TwoMinutePapers" target="_blank" class="block p-3 bg-zinc-900 rounded-lg hover:bg-zinc-800 transition-all">Two Minute Papers</a>
+                        <a href="https://huggingface.co/" target="_blank" class="block p-3 bg-zinc-900 rounded-lg hover:bg-zinc-800 transition-all">Hugging Face (AI Models)</a>
+                        <a href="https://www.coursera.org/" target="_blank" class="block p-3 bg-zinc-900 rounded-lg hover:bg-zinc-800 transition-all">Coursera (Courses)</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section-card text-center" data-section>
+            <h2 class="text-3xl md:text-4xl text-gradient mb-6">Portfolio & Showreel</h2>
+            <div class="video-container mx-auto mb-8 w-full max-w-3xl">
+                <iframe src="https://www.youtube.com/embed/YOUR_YOUTUBE_VIDEO_ID?controls=1&autoplay=0&modestbranding=1&rel=0"
+                        title="CINI FX Showreel" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        allowfullscreen></iframe>
+            </div>
+            <a href="https://drive.google.com/your-portfolio-link-here" target="_blank" class="btn-primary">
+                <i class="fa-solid fa-download"></i> Download My Portfolio
+            </a>
+            <p class="text-xs text-zinc-600 mt-4">
+                (Please replace the YouTube and Google Drive links with your actual content.)
+            </p>
+        </section>
+
+        <section class="section-card" data-section>
+            <div class="grid grid-cols-1 md:grid-cols-[1fr_auto] gap-12 items-center about-grid">
+                <div>
+                    <h2 class="text-3xl md:text-4xl text-gradient mb-4">About Me</h2>
+                    <p class="text-lg text-zinc-300 leading-relaxed mb-4">
+                        My name is <strong class="strong-accent">Nagaprasath</strong>. I am a passionate creator and student of <strong class="strong-accent">VFX and Animation</strong> at Rathinam College of Arts and Science in Coimbatore.
+                    </p>
+                    <p class="text-lg text-zinc-300 leading-relaxed mt-4">
+                        Through my YouTube channel, <strong class="strong-accent">CINI FX</strong>, I share my journey in digital media. I create tutorials, showreels, and creative experiments to help others learn and grow their skills in the exciting world of VFX, game development, and AI-powered content creation. I aim to demystify complex techniques and inspire fellow enthusiasts to explore their own creative potential.
+                    </p>
+                </div>
+                <div class="flex justify-center md:justify-end">
+                    <div class="profile-img w-[250px] h-[250px]">
+                        <img src="IMAGE.jpg" alt="Nagaprasath Profile" class="w-full h-full object-cover rounded-full">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section-card text-center" data-section>
+            <h2 class="text-3xl md:text-4xl text-gradient mb-8">Connect & Support</h2>
+            <div class="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-10">
+                <div class="text-left md:text-right">
+                    <h3 class="text-2xl font-semibold text-white mb-4">Get In Touch</h3>
+                    <p class="text-lg text-zinc-300 mb-3 flex items-center justify-start md:justify-end space-x-3">
+                        <strong class="text-white">Phone:</strong> <span>+91 82202 10538</span>
+                    </p>
+                    <p class="text-lg text-zinc-300 mb-6 flex items-center justify-start md:justify-end space-x-3">
+                            <strong class="text-white">Email:</strong> <a href="mailto:cinifxmedia@gmail.com" class="hover:underline">cinifxmedia@gmail.com</a>
+                    </p>
+                    <h3 class="text-2xl font-semibold text-white mb-4 mt-6">Follow My Journey</h3>
+                    <div class="flex justify-start md:justify-end space-x-3">
+                        <a href="https://www.instagram.com/ps_nagaprasath?igsh=MTBucW8wczNhYnM5aw==" target="_blank" class="social-link" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="https://linkedin.com/in/p-nagaprasath-0b3a97349" target="_blank" class="social-link" aria-label="LinkedIn"><i class="fa-brands fa-linkedin"></i></a>
+                        <a href="https://chat.whatsapp.com/DUxvNDjLybIEhWHHXKZWvf" target="_blank" class="social-link" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+                        <a href="https://t.me/cinifxmedia" target="_blank" class="social-link" aria-label="Telegram"><i class="fa-brands fa-telegram"></i></a>
+                    </div>
+                </div>
+                <div class="text-left border-t-2 md:border-t-0 md:border-l-2 border-zinc-800 pt-8 md:pt-0 md:pl-10">
+                    <h3 class="text-2xl font-semibold text-white mb-4">Support My Work</h3>
+                    <p class="text-lg text-zinc-300 mb-4">
+                        If you enjoy my content, please consider supporting my work. It helps me create more tutorials and creative projects!
+                    </p>
+                    <p class="text-lg text-zinc-300 mb-2">You can support me via UPI:</p>
+                    <p class="text-xl font-bold text-white mb-4">
+                        <span class="bg-zinc-900 px-4 py-2 rounded-lg border border-zinc-700">nagaprasath24-1@okhdfcbank</span>
+                    </p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="text-center py-8 px-4 text-zinc-600 text-sm mt-auto">
+        © <span id="current-year">2025</span> CINI FX | Created by Nagaprasath |
+    </footer>
+
+    <script>
+        // Set current year in footer
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+
+        // Smooth Scroll Reveal for Sections
+        const revealSections = document.querySelectorAll('[data-section]');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-revealed');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, {
+            threshold: 0.1
+        });
+        revealSections.forEach(section => {
+            observer.observe(section);
+        });
+
+        // --- Quiz Game Logic ---
+        const quizQuestions = [
+            { question: "Which software is primarily used for 3D modeling and animation, known for its open-source nature?", options: ["Autodesk Maya", "Adobe After Effects", "Blender", "Cinema 4D"], correctAnswer: "Blender" },
+            { question: "What does VFX stand for in the context of filmmaking?", options: ["Visual Fidelity X-ray", "Video Frame Extension", "Visual Effects", "Virtual Film Xperience"], correctAnswer: "Visual Effects" },
+            { question: "Which game engine is widely known for its physically based rendering and robust visual scripting capabilities?", options: ["Unity", "Godot Engine", "GameMaker Studio 2", "Unreal Engine"], correctAnswer: "Unreal Engine" },
+            { question: "In video editing, what is 'compositing'?", options: ["Arranging clips in a sequence", "Applying color correction", "Combining multiple visual elements into a single image or scene", "Adding background music"], correctAnswer: "Combining multiple visual elements into a single image or scene" },
+            { question: "Which AI tool is commonly used for generating images from text descriptions?", options: ["ChatGPT", "Midjourney", "Adobe Photoshop", "DaVinci Resolve"], correctAnswer: "Midjourney" },
+        ];
+
+        let currentQuestionIndex = 0;
+        let score = 0;
+        let answered = false;
+
+        const questionText = document.getElementById('question-text');
+        const optionsContainer = document.getElementById('options-container');
+        const feedbackArea = document.getElementById('feedback-area');
+        const restartButton = document.getElementById('restart-button');
+
+        function loadQuestion() {
+            if (!questionText) return; 
+            
+            answered = false;
+            feedbackArea.classList.add('hidden');
+            restartButton.classList.add('hidden');
+            
+            quizQuestions.sort(() => Math.random() - 0.5);
+
+            const q = quizQuestions[currentQuestionIndex];
+            questionText.textContent = `${currentQuestionIndex + 1}. ${q.question}`;
+            optionsContainer.innerHTML = '';
+
+            q.options.forEach(option => {
+                const button = document.createElement('button');
+                button.textContent = option;
+                button.classList.add('quiz-option-btn');
+                button.onclick = () => checkAnswer(option, q.correctAnswer, button);
+                optionsContainer.appendChild(button);
+            });
+        }
+
+        function checkAnswer(selectedOption, correctAnswer, clickedButton) {
+            if (answered) return;
+            answered = true;
+
+            Array.from(optionsContainer.children).forEach(btn => {
+                btn.disabled = true;
+                if (btn.textContent === correctAnswer) {
+                    btn.classList.add('correct');
+                }
+            });
+
+            if (selectedOption === correctAnswer) {
+                feedbackArea.textContent = "Correct! 🎉";
+                feedbackArea.className = 'text-center mt-6 text-xl font-medium text-green-400';
+                clickedButton.classList.add('correct');
+                score++;
+            } else {
+                feedbackArea.textContent = `Incorrect. The answer is "${correctAnswer}". 😔`;
+                feedbackArea.className = 'text-center mt-6 text-xl font-medium text-red-500';
+                clickedButton.classList.add('incorrect');
+            }
+            feedbackArea.classList.remove('hidden');
+
+            setTimeout(nextQuestion, 2000);
+        }
+
+        function nextQuestion() {
+            currentQuestionIndex++;
+            if (currentQuestionIndex < quizQuestions.length) {
+                loadQuestion();
+            } else {
+                showResults();
+            }
+        }
+
+        function showResults() {
+            questionText.textContent = `Quiz Finished!`;
+            optionsContainer.innerHTML = `<p class="text-2xl text-center text-zinc-200 col-span-2">You scored ${score} out of ${quizQuestions.length}!</p>`;
+            feedbackArea.classList.add('hidden');
+            restartButton.classList.remove('hidden');
+            restartButton.onclick = restartQuiz;
+        }
+        
+        function restartQuiz() {
+            currentQuestionIndex = 0;
+            score = 0;
+            loadQuestion();
+        }
+
+        if(document.getElementById('quiz-container')) {
+            loadQuestion();
+        }
+    </script>
+</body>
+</html>
